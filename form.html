@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./promise.js"></script>
+</head>
+<body>
+<script>
+    async function gets() {
+        try {
+            var result2 = await getJson('./test2.json')
+            var result1 = await getJson('./text.json')
+            return {
+                re1: result1,
+                re2: result2
+            };
+        } catch (e) {
+            throw Error(e)
+        }
+    }
+    gets().then(function (e) {
+        console.log(e.re1)
+        console.log(e.re2)
+    })
+    const arrContainsEmptyVal = [3, 4, 5, 2, 3, undefined, null, 0, ""];
+    const compact = arr => arr.filter(Boolean);
+    //console.log(compact(arrContainsEmptyVal))
+    const users = [
+        { username: "Kelly", isVIP: true, balance: 20 },
+        { username: "Tom", isVIP: false, balance: 19 },
+        { username: "Stephanie", isVIP: true, balance: 30 }
+    ];
+    var aaa = users.map(
+        user => (user.isVIP ? {...user, balance: user.balance+10} : user)
+    )
+    const userst = [
+        { name: "Jim", age: 23 },
+        { name: "Lily", age: 17 },
+        { name: "Will", age: 25 }
+    ];
+
+    var aa = userst.every(user => users.find(user => user.age < 18))
+    console.log(aa)
+</script>
+</body>
+</html>

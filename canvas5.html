@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas动画序</title>
+</head>
+<body>
+<canvas id="canvas" width='500' height="500">
+    <P>you browser not support canvas!</P>
+</canvas>
+<script src="./utils.js"></script>
+<script>
+    function Arrow() {
+        this.x = 0;
+        this.y = 0;
+        this.rotation = 0;
+        this.color = '#ffff00';
+    }
+
+    Arrow.prototype.draw = function (context) {
+        context.save();
+        context.translate(this.x, this.y);
+        context.rotate(this.rotation);
+        context.lineWidth = 5;
+        context.fillStyle = this.color;
+        context.beginPath();
+        context.moveTo(-50, -25);
+        context.lineTo(0, -25);
+        context.lineTo(0,-50);
+        context.lineTo(50,0);
+        context.lineTo(0,50);
+        context.lineTo(0,25);
+        context.lineTo(-50,25);
+        context.closePath(); //路径闭合
+        context.stroke(); //描边
+        context.fill(); //填充
+        context.restore();
+    }
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+
+        var mouse = utils.captureMouse(canvas);
+
+        var arrow = new Arrow();
+
+        arrow.x = centerX;
+        arrow.y = centerY;
+
+
+
+
+        //动画循环函数
+        (function drawFrame(){
+            window.requestAnimationFrame(drawFrame,canvas);
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            //获取dy,dx值
+            var dx = mouse.x - arrow.x,
+                dy = mouse.y - arrow.y;
+
+            //设置旋转角度
+            arrow.rotation = Math.atan2(dy, dx);
+
+            //调用draw方法画出
+            arrow.draw(context);
+            console.log(9)
+        })();
+    }
+</script>
+</body>
+</html>

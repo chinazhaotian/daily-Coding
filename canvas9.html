@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    * {
+        margin:0;
+        padding:0;
+    }
+</style>
+<body>
+<canvas id="canvas" width="500" height="500" style="background:#000;">
+    your browser not support canvas
+</canvas>
+</body>
+<script src="./ball.js"></script>
+<script src="./utils.js"></script>
+<script src="longClick.js"></script>
+<script>
+    window.onload = function(){
+        var canvas =document.getElementById('canvas');
+
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+    }
+</script>
+</html>

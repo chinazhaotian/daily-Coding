@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="router.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li><a href="#/">turn yellow</a></li>
+        <li><a href="#/blue">turn blue</a></li>
+        <li><a href="#/green">turn green</a></li>
+    </ul>
+</div>
+<script>
+    const Router = new Routers();
+
+    const content = document.querySelector('body')
+
+    function changeBgColor(color) {
+        content.style.background = color
+    }
+
+    Router.route('/', function () {
+        changeBgColor('yellow')
+    })
+
+    Router.route('/green', function () {
+        changeBgColor('green')
+    })
+
+    Router.route('/blue', function () {
+        changeBgColor('blue')
+    })
+</script>
+</body>
+</html>

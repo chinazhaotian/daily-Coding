@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Helvetica, Sans, Arial;
+        }
+
+        p {
+            display: block;
+        }
+    </style>
+    <script src="MooTools-Core-1.6.0.js"></script>
+</head>
+<body>
+    <div id='target'>
+    </div>
+<script>
+    function get(text, delay) {
+        return new Promise(function(resolve, reject) {
+            
+            var request = new Request.HTML({
+                url: '/echo/html/',
+                data: {
+                    html: text,
+                    delay: delay
+                },
+                method: 'post',
+                onSuccess: function(data) {
+                    resolve(data);
+                },
+                onFailure: function() {
+                    reject();
+                }
+            });
+            request.send();
+        });
+    }
+
+    var chapterStrs = [
+        'chapter1',
+        'chapter2',
+        'chapter3',
+        'chapter4',
+        'chapter5',
+        'chapter6',
+        'chapter7',
+        'chapter8',
+        'chapter9',
+        'chapter10',
+    ];
+
+    var getChapter = function(chapterStr) {
+        return get('<p>' + chapterStr + '</p>', Math.round(Math.random()*5));
+    };
+
+    var addToPage = function(data) {
+        data[0].inject($('target'));
+    }
+
+    function fasterChapter() {
+        chapterStrs.map(getChapter).reduce(function(sequence, chapterStrPromise) {
+            return sequence.then(function(){
+                chapterStrPromise.then(function(chapter){
+                    addToPage(chapter);
+                });
+                return chapterStrPromise;
+            });
+        }, Promise.resolve());
+    }
+
+    fasterChapter();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="550" height="550"></canvas>
+    <script type="application/javascript">
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext("2d");
+        //平移坐标系之前
+        ctx.strokeStyle = 'grey';
+        ctx.setLineDash([2, 2]);
+        ctx.rect(10, 10, 100, 100); //绘制矩形
+        ctx.stroke();
+        //平移坐标系
+        ctx.translate(120,20); //平移坐标系，往右平移120px,往下平移20px
+        ctx.beginPath(); //开始新的路径
+        ctx.strokeStyle='blue';
+        ctx.setLineDash([]);
+        ctx.rect(10, 10, 100, 100); //绘制同样的矩形
+        ctx.stroke();
+    </script>
+</body>
+</html>

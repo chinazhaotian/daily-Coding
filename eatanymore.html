@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id="click">吃什么</button>
+    <div id="food"></div>
+    <script>
+        var foodName = '拉面,食堂,外卖,肯德基,pizza hat,自带...';
+        var foodNameArray = foodName.split(',');
+        var num = foodNameArray.length-1;
+        var timer;
+        function $(o){
+            return document.getElementById(o);
+        }
+        function change(){
+            $('foodName').innerHTML = foodNameArray[getRun(0,num)];
+        }
+        function getRun(_min,_max){
+            return parseInt(Math.random()*(_max-_min+1));
+        }
+        function Start(){
+            clearInterval(timer);
+            timer = setInterval('change()',30);
+        }
+        function Stop(){
+            clearInterval(timer);
+        }
+
+    </script>
+</body>
+</html>
